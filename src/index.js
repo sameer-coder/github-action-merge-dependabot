@@ -40,6 +40,8 @@ async function run() {
         githubToken: GITHUB_TOKEN,
       }))
 
+    console.log(JSON.stringify(pr))
+
     const isDependabotPR = pr.user.login === 'dependabot[bot]'
 
     if (!isDependabotPR) {
@@ -55,6 +57,7 @@ async function run() {
     }
 
     // dependabot branch names are in format "dependabot/npm_and_yarn/pkg-0.0.1"
+    console.log('pr.head.ref:', pr.head.ref)
     const pkgName = pr.head.ref.split('/').pop().split('-').shift()
 
     if (EXCLUDE_PKGS.includes(pkgName)) {
